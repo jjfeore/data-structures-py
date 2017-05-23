@@ -46,11 +46,13 @@ class LinkedList(object):
     def display(self):
         """Return a string with all the list Node values and their order."""
         current_node = self.head
-        the_str = ''
+        the_str = '('
         while current_node:
-            the_str += '({})'.format(current_node.val)
-            if current_node.next is not None:
-                the_str += ' -> '
+            the_str += str(current_node.val)
+            if current_node.next is None:
+                the_str += ')'
+            else:
+                the_str += ', '
             current_node = current_node.next
         return the_str
 

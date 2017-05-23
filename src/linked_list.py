@@ -15,7 +15,7 @@ class LinkedList(object):
 
     def __init__(self, iterable=None):
         """Create a new empty Linked List."""
-        if iterable:
+        if type(iterable) in [list, tuple, str]:
             self.head = None
             self.length = 0
             for val in iterable:

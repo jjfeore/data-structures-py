@@ -16,6 +16,8 @@ class LinkedList(object):
     def __init__(self, iterable=None):
         """Create a new empty Linked List."""
         if iterable:
+            self.head = None
+            self.length = 0
             for val in iterable:
                 self.push(val)
         else:
@@ -46,7 +48,7 @@ class LinkedList(object):
         current_node = self.head
         the_str = ''
         while current_node:
-            the_str += '({})'.format(current_node)
+            the_str += '({})'.format(current_node.val)
             if current_node.next is not None:
                 the_str += ' -> '
             current_node = current_node.next
@@ -66,10 +68,12 @@ class LinkedList(object):
         node_exists = False
         if self.head is node:
             self.head = self.head.next
+            self.length -= 1
             node_exists = True
-        while current_node.next:
+        while current_node.next and not node_exists:
             if current_node.next is node:
                 current_node.next = current_node.next.next
+                self.length -= 1
                 node_exists = True
                 break
             current_node = current_node.next

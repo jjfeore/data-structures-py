@@ -40,7 +40,7 @@ def test_stack_none():
     """When a new stack is created with no iterable, head should be None."""
     from stack import Stack
     test_stack = Stack()
-    assert test_stack.head is None
+    assert test_stack.newlinkedlist.head is None
 
 
 @pytest.mark.parametrize('iterable, result', TEST_ITER)
@@ -48,7 +48,7 @@ def test_stack_iterable(iterable, result):
     """When a new stack is created with an iterable, head should be last element of the iterable."""
     from stack import Stack
     test_stack = Stack(iterable)
-    assert test_stack.head.val == result
+    assert test_stack.newlinkedlist.head.val == result
 
 
 @pytest.mark.parametrize('val', TEST_PUSH)
@@ -57,7 +57,7 @@ def test_stack_push(val):
     from stack import Stack
     test_stack = Stack()
     test_stack.push(val)
-    assert test_stack.head.val == val
+    assert test_stack.newlinkedlist.head.val == val
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
@@ -68,9 +68,9 @@ def test_stack_push_mult(val1, val2, val3):
     test_stack.push(val1)
     test_stack.push(val2)
     test_stack.push(val3)
-    assert test_stack.head.val == val3
-    assert test_stack.head.next.val == val2
-    assert test_stack.head.next.next.val == val1
+    assert test_stack.newlinkedlist.head.val == val3
+    assert test_stack.newlinkedlist.head.next.val == val2
+    assert test_stack.newlinkedlist.head.next.next.val == val1
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)

@@ -52,6 +52,18 @@ TEST_DISP = [
 ]
 
 
+@pytest.fixture
+def new_empty_list():
+    '''make a new empty list'''
+    from linked_list import LinkedList
+    return LinkedList()
+
+
+def test_linked_list_head(new_empty_list):
+    '''Trest our linked list head'''
+    assert hasattr(new_empty_list, 'head')
+
+
 def test_linked_list_none():
     """When a new list is created with no iterable, head should be None."""
     from linked_list import LinkedList

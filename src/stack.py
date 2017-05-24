@@ -1,7 +1,7 @@
 """Constructing the Stack data structure."""
 
 
-from linked_list import Node
+from linked_list import LinkedList
 
 
 class Stack(object):
@@ -9,30 +9,16 @@ class Stack(object):
 
     def __init__(self, iterable=None):
         """Create a new empty stack."""
-        if type(iterable) in [list, tuple, str]:
-            self.head = None
-            self.length = 0
-            for val in iterable:
-                self.push(val)
-        else:
-            self.head = None
-            self.length = 0
+        self.newlinkedlist = LinkedList(iterable)
 
     def push(self, val):
         """Add a new Node to the head of the stack."""
-        self.head = Node(val, self.head)
-        self.length += 1
+        return self.newlinkedlist.push(val)
 
     def pop(self):
         """Remove the head of the stack and returns its value."""
-        if self.head is not None:
-            ret_val = self.head.val
-            self.head = self.head.next
-            self.length -= 1
-            return ret_val
-        else:
-            raise IndexError('Stack is empty')
+        return self.newlinkedlist.pop()
 
     def __len__(self):
         """Return the length of the stack."""
-        return self.length
+        return self.newlinkedlist.size()

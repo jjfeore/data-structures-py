@@ -26,7 +26,8 @@ class DLinkedList(object):
         self.head = DNode(val, self.head, None)
         if self.head.next is None:
             self.tail = self.head
-        new_next.prev = self.head
+        else:
+            new_next.prev = self.head
         self.length += 1
 
     def append(self, val):
@@ -35,14 +36,16 @@ class DLinkedList(object):
         self.tail = DNode(val, None, self.tail)
         if self.tail.prev is None:
             self.head = self.tail
-        new_prev.next = self.tail
+        else:
+            new_prev.next = self.tail
         self.length += 1
 
     def pop(self):
         """Remove the head of the list and returns its value."""
         if self.head is not None:
             ret_val = self.head.val
-            self.head.next.prev = None
+            if self.head.next is not None:
+                self.head.next.prev = None
             self.head = self.head.next
             if self.head is None:
                 self.tail = None
@@ -55,7 +58,8 @@ class DLinkedList(object):
         """Remove the tail of the list and returns its value."""
         if self.tail is not None:
             ret_val = self.tail.val
-            self.tail.prev.next = None
+            if self.tail.prev is not None:
+                self.tail.prev.next = None
             self.tail = self.tail.prev
             if self.tail is None:
                 self.head = None

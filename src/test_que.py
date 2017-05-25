@@ -35,7 +35,7 @@ def test_que_none(new_que):
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_ENQ)
-def test_stack_enq(val1, val2, val3, new_que):
+def test_que_enq(val1, val2, val3, new_que):
     """Push three values and check to see that they're in the DLL."""
     new_que.enqueue(val1)
     new_que.enqueue(val2)
@@ -46,7 +46,7 @@ def test_stack_enq(val1, val2, val3, new_que):
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_ENQ)
-def test_stack_deque(val1, val2, val3, new_que):
+def test_que_deque(val1, val2, val3, new_que):
     """Append 3 values and check that the right vals shift out."""
     new_que.enqueue(val1)
     new_que.enqueue(val2)
@@ -57,7 +57,7 @@ def test_stack_deque(val1, val2, val3, new_que):
 
 
 @pytest.mark.parametrize('iterable, result', TEST_LEN)
-def test_dll_len(iterable, result, new_que):
+def test_que_len(iterable, result, new_que):
     """Test the size/len of the queue."""
     for idx in range(len(iterable)):
         new_que.enqueue(iterable[idx])

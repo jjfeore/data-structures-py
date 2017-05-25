@@ -1,11 +1,11 @@
-"""Constructing the Stack data structure."""
+"""Constructing the Queue data structure."""
 
 
 from dll import DLinkedList
 
 
 class Queue(object):
-    """Define a stack and its methods."""
+    """Define a queue and its methods."""
 
     def __init__(self):
         """Create a new empty queue."""

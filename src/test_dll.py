@@ -44,7 +44,7 @@ def test_stack_none(new_dll):
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
 def test_stack_push_mult(val1, val2, val3, new_dll):
-    """Push three values and check to see that they're in the stack."""
+    """Push three values and check to see that they're in the DLL."""
     new_dll.push(val1)
     new_dll.push(val2)
     new_dll.push(val3)
@@ -64,9 +64,42 @@ def test_stack_pop(val1, val2, val3, new_dll):
     assert new_dll.pop() == val1
 
 
+@pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
+def test_stack_append(val1, val2, val3, new_dll):
+    """Append 3 values and check that they're in the DLL."""
+    new_dll.append(val1)
+    new_dll.append(val2)
+    new_dll.append(val3)
+    assert new_dll.tail.val == val3
+    assert new_dll.tail.prev.val == val2
+    assert new_dll.head.val == val1
+
+
+@pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
+def test_stack_shift(val1, val2, val3, new_dll):
+    """Append 3 values and check that the right vals shift out."""
+    new_dll.append(val1)
+    new_dll.append(val2)
+    new_dll.append(val3)
+    assert new_dll.shift() == val3
+    assert new_dll.shift() == val2
+    assert new_dll.shift() == val1
+
+
 @pytest.mark.parametrize('iterable, result', TEST_LEN)
 def test_dll_len(iterable, result, new_dll):
     """Test the size/len of the list."""
     for idx in range(len(iterable)):
         new_dll.append(iterable[idx])
     assert len(new_dll) == result
+
+
+@pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
+def test_stack_remove(val1, val2, val3, new_dll):
+    """Append 3 values and check that the right vals shift out."""
+    new_dll.append(val1)
+    new_dll.append(val2)
+    new_dll.append(val3)
+    new_dll.remove(val1)
+    assert new_dll.head.val == val2
+    assert new_dll.tail.val == val3

@@ -69,7 +69,7 @@ class DLinkedList(object):
             raise IndexError('Linked list is empty')
 
     def remove(self, val):
-        """Remove a given node from the list."""
+        """Remove a given node from the list based on its val."""
         current_node = self.head
         val_exists = False
         if self.head.val == val:

@@ -8,7 +8,8 @@ TEST_ENQ = [
     (1, 2, 3),
     (800, 'String', 5),
     ('String', ['list'], 17),
-    ([5, 3, 17], [5, 'list two'], 'another string')
+    ([5, 3, 17], [5, 'list two'], 'another string'),
+    ('monkies', ['spiders', 'spidermonkey'], ('spi', 'der', 'monk'))
 ]
 
 
@@ -16,7 +17,8 @@ TEST_LEN = [
     ([1], 1),
     ((17, 5, 100), 3),
     ('String', 6),
-    ([5, 3, 17], 3)
+    ([5, 3, 17], 3),
+    ((1, 2, 3, 4, 5, 6, 7, 8, 9), 9)
 ]
 
 

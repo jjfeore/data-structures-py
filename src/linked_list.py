@@ -47,6 +47,8 @@ class LinkedList(object):
         """Return a string with all the list Node values and their order."""
         current_node = self.head
         the_str = '('
+        if not current_node:
+            the_str += ')'
         while current_node:
             the_str += str(current_node.val)
             if current_node.next is None:
@@ -54,8 +56,6 @@ class LinkedList(object):
             else:
                 the_str += ', '
             current_node = current_node.next
-        else:
-            the_str += ')'
         return the_str
 
     def __len__(self):
@@ -68,24 +68,21 @@ class LinkedList(object):
 
     def remove(self, node):
         """Remove a given node from the list."""
-        try:
-            current_node = self.head
-            node_exists = False
-            if self.head is node:
-                self.head = self.head.next
+        current_node = self.head
+        node_exists = False
+        if not current_node:
+            return None
+        if self.head is node:
+            self.head = self.head.next
+            self.length -= 1
+            node_exists = True
+        while current_node.next and not node_exists:
+            if current_node.next is node:
+                current_node.next = current_node.next.next
                 self.length -= 1
                 node_exists = True
-            while current_node.next and not node_exists:
-                if current_node.next is node:
-                    current_node.next = current_node.next.next
-                    self.length -= 1
-                    node_exists = True
-                    break
-                current_node = current_node.next
-            if not node_exists:
-                raise ValueError('Node not in list')
-        except ValueError:
-            return None
+                break
+            current_node = current_node.next
 
     def search(self, val):
         """Return the first Node containing the value."""

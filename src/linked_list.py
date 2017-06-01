@@ -47,6 +47,8 @@ class LinkedList(object):
         """Return a string with all the list Node values and their order."""
         current_node = self.head
         the_str = '('
+        if not current_node:
+            the_str += ')'
         while current_node:
             the_str += str(current_node.val)
             if current_node.next is None:
@@ -68,6 +70,8 @@ class LinkedList(object):
         """Remove a given node from the list."""
         current_node = self.head
         node_exists = False
+        if not current_node:
+            return None
         if self.head is node:
             self.head = self.head.next
             self.length -= 1
@@ -79,8 +83,6 @@ class LinkedList(object):
                 node_exists = True
                 break
             current_node = current_node.next
-        if not node_exists:
-            raise IndexError('Node not in list')
 
     def search(self, val):
         """Return the first Node containing the value."""

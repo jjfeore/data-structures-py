@@ -150,12 +150,13 @@ def test_linked_list_remove(iter1, search, result):
         res_curr = res_curr.next
 
 
-def test_linked_list_remove_empty():
+def test_linked_list_remove_edge_cases():
     """Create an empty link list and attempt to remove node."""
     from linked_list import LinkedList
     from linked_list import Node
     test_list = LinkedList()
-    assert test_list.remove(Node(5, None)) is None
+    with pytest.raises(IndexError):
+        test_list.remove(Node(5, None))
 
 
 @pytest.mark.parametrize('iterable, result', TEST_DISP)

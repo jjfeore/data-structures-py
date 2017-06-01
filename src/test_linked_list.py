@@ -150,6 +150,14 @@ def test_linked_list_remove(iter1, search, result):
         res_curr = res_curr.next
 
 
+def test_linked_list_remove_empty():
+    '''Create an empty link list and attempt to remove node.'''
+    from linked_list import LinkedList
+    from linked_list import Node
+    test_list = LinkedList()
+    assert test_list.remove(Node(5, None)) == None
+
+
 @pytest.mark.parametrize('iterable, result', TEST_DISP)
 def test_linked_list_display(iterable, result):
     """Create a list, display it, and check the return."""

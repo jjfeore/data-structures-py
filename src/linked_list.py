@@ -54,6 +54,8 @@ class LinkedList(object):
             else:
                 the_str += ', '
             current_node = current_node.next
+        else:
+            the_str += ')'
         return the_str
 
     def __len__(self):
@@ -66,21 +68,24 @@ class LinkedList(object):
 
     def remove(self, node):
         """Remove a given node from the list."""
-        current_node = self.head
-        node_exists = False
-        if self.head is node:
-            self.head = self.head.next
-            self.length -= 1
-            node_exists = True
-        while current_node.next and not node_exists:
-            if current_node.next is node:
-                current_node.next = current_node.next.next
+        try:
+            current_node = self.head
+            node_exists = False
+            if self.head is node:
+                self.head = self.head.next
                 self.length -= 1
                 node_exists = True
-                break
-            current_node = current_node.next
-        if not node_exists:
-            raise IndexError('Node not in list')
+            while current_node.next and not node_exists:
+                if current_node.next is node:
+                    current_node.next = current_node.next.next
+                    self.length -= 1
+                    node_exists = True
+                    break
+                current_node = current_node.next
+            if not node_exists:
+                raise ValueError('Node not in list')
+        except ValueError:
+            return None
 
     def search(self, val):
         """Return the first Node containing the value."""

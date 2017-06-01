@@ -5,8 +5,8 @@ from dll import DLinkedList
 
 
 def Dque(object):
-
     '''Define dqueue and its methods.'''
+
     def __init__(self):
         '''Create a new empty dqueue.'''
         self.new_dll = DLinkedList()

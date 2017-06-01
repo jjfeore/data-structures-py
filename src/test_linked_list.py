@@ -116,6 +116,14 @@ def test_linked_list_pop(val1, val2, val3):
     assert test_list.pop() == val1
 
 
+def test_linked_list_pop_empty():
+    """Create an empty DLL and attempt to pop value."""
+    from linked_list import LinkedList
+    test_list = LinkedList()
+    with pytest.raises(IndexError):
+        test_list.pop()
+
+
 @pytest.mark.parametrize('iterable, result', TEST_LEN)
 def test_linked_list_len(iterable, result):
     """Push an iterable to the list, and then test the size/len of the list."""
@@ -165,3 +173,10 @@ def test_linked_list_display(iterable, result):
     from linked_list import LinkedList
     test_list = LinkedList(iterable)
     assert test_list.display() == result
+
+
+def test_linked_list_display_empty():
+    """Create a list, display it, and check the return."""
+    from linked_list import LinkedList
+    test_list = LinkedList()
+    assert test_list.display() == '()'

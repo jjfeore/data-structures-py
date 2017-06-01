@@ -56,13 +56,13 @@ TEST_DISP = [
 
 @pytest.fixture
 def new_empty_list():
-    '''make a new empty list'''
+    """Make a new empty list."""
     from linked_list import LinkedList
     return LinkedList()
 
 
 def test_linked_list_head(new_empty_list):
-    '''Trest our linked list head'''
+    """Test our linked list head."""
     assert hasattr(new_empty_list, 'head')
 
 
@@ -151,11 +151,11 @@ def test_linked_list_remove(iter1, search, result):
 
 
 def test_linked_list_remove_empty():
-    '''Create an empty link list and attempt to remove node.'''
+    """Create an empty link list and attempt to remove node."""
     from linked_list import LinkedList
     from linked_list import Node
     test_list = LinkedList()
-    assert test_list.remove(Node(5, None)) == None
+    assert test_list.remove(Node(5, None)) is None
 
 
 @pytest.mark.parametrize('iterable, result', TEST_DISP)

@@ -2,7 +2,7 @@
 
 
 class Node(object):
-    """."""
+    """Define the Node object."""
 
     def __init__(self, val, next):
         """Create a new Node object with a val and a Node it points to."""

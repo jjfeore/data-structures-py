@@ -12,13 +12,14 @@ setup(
     author='James Feore, James Salamonsen',
     author_email='jjfeore@gmail.com, jamessalamonsen@gmail.com',
     license='MIT',
-    py_modules=['dqueue'],
+    py_modules=['dqueue', 'linked_list'],
     package_dir={'': 'src'},
     install_requires=[],
     extras_require=extra_packages,
     entry_points={
         'console_scripts': [
-            'dqueue = dqueue:main'
+            'dqueue = dqueue:main',
+            'linked_list = linked_list:main'
         ]
     }
 )

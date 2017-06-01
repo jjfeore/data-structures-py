@@ -130,6 +130,23 @@ def test_dll_remove_mid(val1, val2, val3, new_dll):
     assert len(new_dll) == 2
 
 
+@pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
+def test_dll_remove_long(val1, val2, val3, new_dll):
+    """Append 3 values and check that the right vals shift out."""
+    new_dll.append(val1)
+    new_dll.append('hello')
+    new_dll.append(val2)
+    new_dll.append('this')
+    new_dll.append('is')
+    new_dll.append('a')
+    new_dll.append(val3)
+    new_dll.append('test')
+    new_dll.remove(val2)
+    assert new_dll.head.next.next.val == 'this'
+    assert new_dll.tail.prev.val == val3
+    assert len(new_dll) == 7
+
+
 def test_dll_shift_empty(new_dll):
     """Create an empty DLL and attempt to shift value."""
     with pytest.raises(IndexError):

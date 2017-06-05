@@ -1,42 +1,55 @@
-'''Binary Heap Data Structure.'''
-from dll import DLinkedList
+"""Binary Heap Data Structure."""
+import collections
 
 
-class bi_heap:
-    def __init__(self):
-        self.heap = [0]
-        self.length = 0
+class Biheap:
+    def __init__(self, iter=None):
+        self.heap = []
+        if isinstance(iter, collections.Iterable):
+            for item in iter:
+                self.push(item)
 
-    def bubb_up(self, i):
-        while i // 2 > 0:
-            if self.heap[i] < self.heap[i // 2]:
-                tmp = self.heap[i // 2]
-                self.heap[i // 2] = self.heap[i]
-                self.heap[i] = tmp
-            i = i // 2
-
-    def push(self):
-        '''Remove the value that is at the end of the queue.'''
-        return self.heap.push()
-
-    def bubb_dow(self, i):
-        while (i * 2) <= self.length:
-            mc = self.min_child(i)
-            if self.heap[i] > self.heap[mc]:
-                tmp = self.heap[i]
-                self.heap[i] = self.heap[mc]
-                self.heap[mc] = tmp
-            i = mc
-
-    def min_child(self, i):
-        if i * 2 + 1 > self.length:
-            return i * 2
-        else:
-            if self.heap[i*2] < self.heap[i*2+1]:
-                return i * 2
+    def push(self, val):
+        """Add a value to our heap."""
+        self.heap.append(val)
+        pos = len(self.heap) - 1
+        if len(self.heap) > 1:
+            if pos % 2 == 1:
+                parent = pos // 2
             else:
-                return i * 2 + 1
+                parent = (pos // 2) - 1
+            while self.heap[parent] > self.heap[pos]:
+                tmp = self.heap[parent]
+                self.heap[parent] = self.heap[pos]
+                self.heap[pos] = tmp
+                pos = parent
+                if pos % 2 == 1:
+                    parent = pos // 2
+                else:
+                    parent = (pos // 2) - 1
 
     def pop(self):
-        '''Remove the value that is at the end of the queue.'''
-        return self.heap.pop()
+        """Remove the value that is at the top of the heap."""
+        top = self.heap[0]
+        self.heap[0] = self.heap[-1]
+        del self.heap[-1]
+        pos = 0
+        if len(self.heap) > 1:
+            left = (pos * 2) + 1
+            right = (pos * 2) + 2
+            while self.heap[left] > self.heap[pos] or self.heap[right] > self.heap[pos]:
+                if self.heap[left] > self.heap[pos]:
+                    tmp = self.heap[left]
+                    self.heap[left] = self.heap[pos]
+                    self.heap[pos] = tmp
+                    pos = left
+                    left = (pos * 2) + 1
+                    right = (pos * 2) + 2
+                elif self.heap[right] > self.heap[pos]:
+                    tmp = self.heap[right]
+                    self.heap[right] = self.heap[pos]
+                    self.heap[pos] = tmp
+                    pos = right
+                    left = (pos * 2) + 1
+                    right = (pos * 2) + 2
+        return top

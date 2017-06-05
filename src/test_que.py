@@ -42,9 +42,9 @@ def test_que_enq(val1, val2, val3, new_que):
     new_que.enqueue(val1)
     new_que.enqueue(val2)
     new_que.enqueue(val3)
-    assert new_que.newDLL.head.val == val3
+    assert new_que.newDLL.head.val == val1
     assert new_que.newDLL.head.next.val == val2
-    assert new_que.newDLL.head.next.next.val == val1
+    assert new_que.newDLL.head.next.next.val == val3
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_ENQ)
@@ -56,6 +56,15 @@ def test_que_deque(val1, val2, val3, new_que):
     assert new_que.dequeue() == val1
     assert new_que.dequeue() == val2
     assert new_que.dequeue() == val3
+
+
+@pytest.mark.parametrize('val1, val2, val3', TEST_ENQ)
+def test_que_peek(val1, val2, val3, new_que):
+    """Append 3 values, peek, and check the val."""
+    new_que.enqueue(val1)
+    new_que.enqueue(val2)
+    new_que.enqueue(val3)
+    assert new_que.peek() == val1
 
 
 @pytest.mark.parametrize('iterable, result', TEST_LEN)

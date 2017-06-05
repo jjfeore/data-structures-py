@@ -56,13 +56,13 @@ TEST_DISP = [
 
 @pytest.fixture
 def new_empty_list():
-    '''make a new empty list'''
+    """Make a new empty list."""
     from linked_list import LinkedList
     return LinkedList()
 
 
 def test_linked_list_head(new_empty_list):
-    '''Trest our linked list head'''
+    """Test our linked list head."""
     assert hasattr(new_empty_list, 'head')
 
 
@@ -116,6 +116,14 @@ def test_linked_list_pop(val1, val2, val3):
     assert test_list.pop() == val1
 
 
+def test_linked_list_pop_empty():
+    """Create an empty DLL and attempt to pop value."""
+    from linked_list import LinkedList
+    test_list = LinkedList()
+    with pytest.raises(IndexError):
+        test_list.pop()
+
+
 @pytest.mark.parametrize('iterable, result', TEST_LEN)
 def test_linked_list_len(iterable, result):
     """Push an iterable to the list, and then test the size/len of the list."""
@@ -129,10 +137,13 @@ def test_linked_list_search():
     """Create a new linked list, search it, and confirm we receive the right values."""
     from linked_list import LinkedList
     test_list = LinkedList([17, 3, 5, 19, 8])
+    empty_list = LinkedList()
     assert test_list.search(5) is test_list.head.next.next
     assert test_list.search(19) is test_list.head.next
     assert test_list.search(3) is test_list.head.next.next.next
     assert test_list.search(17) is test_list.head.next.next.next.next
+    assert empty_list.search(100) is None
+    assert test_list.search(100) is None
 
 
 @pytest.mark.parametrize('iter1, search, result', TEST_REM)
@@ -151,11 +162,22 @@ def test_linked_list_remove(iter1, search, result):
 
 
 def test_linked_list_remove_empty():
-    '''Create an empty link list and attempt to remove node.'''
+    """Create an empty link list and attempt to remove node."""
     from linked_list import LinkedList
     from linked_list import Node
     test_list = LinkedList()
-    assert test_list.remove(Node(5, None)) == None
+    with pytest.raises(IndexError):
+        test_list.remove(Node(5, None))
+
+
+def test_linked_list_remove_invalid():
+    """Create an empty link list and attempt to remove node."""
+    from linked_list import LinkedList
+    from linked_list import Node
+    test_list = LinkedList()
+    test_list.push(7)
+    with pytest.raises(IndexError):
+        test_list.remove(Node(5, None))
 
 
 @pytest.mark.parametrize('iterable, result', TEST_DISP)
@@ -164,3 +186,10 @@ def test_linked_list_display(iterable, result):
     from linked_list import LinkedList
     test_list = LinkedList(iterable)
     assert test_list.display() == result
+
+
+def test_linked_list_display_empty():
+    """Create a list, display it, and check the return."""
+    from linked_list import LinkedList
+    test_list = LinkedList()
+    assert test_list.display() == '()'

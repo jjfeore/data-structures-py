@@ -1,39 +1,39 @@
-'''Implement a graph data structure'''
-
-
-class Node(object):
-    def __init__(self, iter):
-        self.iter = iter
+"""Implement a graph data structure."""
 
 
 class Graph(object):
-    '''Define graph and modules'''
-
+    """Define graph and modules."""
     def __init__(self):
-        self.node = {}
+        self.graph = {}
 
     def nodes(self):
-        return self.nodes.keys()
+        return list(self.graph.keys())
 
     def edges(self):
-        '''Lists the edges'''
+        """Lists the edges."""
         edges = []
-        for node in self.nodes:
-            for i in self.nodes[node]:
-                edge = (node, i)
-                if edge not in edges:
-                    edges.append(edge)
+        for node in self.graph:
+            for i in self.graph[node]:
+                edges.append((node, i))
         return edges
 
-    def add_node(self, iter, x):
-        """Adds a node with a iterable which is a neighbor of x"""
-        node = Node(iter)
-        self.nodes[node] = [x]
-        self.nodes[x].append(node)
+    def add_node(self, x):
+        """Adds a node with a iterable which is a neighbor of x."""
+        if not self.graph[x]:
+            self.graph[x] = []
+
+    def add_edge(self, val1, val2):
+        """Adds a edge to two values."""
+        if not self.graph[val1]:
+            self.graph[val1] = []
+        if not self.graph[val2]:
+            self.graph[val2] = []
+        if val2 not in self.graph[val1]:
+            self.graph[val1].append(val2)
 
     def del_node(self, node):
-        """Removes node from graph"""
-        for node in self.nodes:
-            if node in self.nodes[node]:
-                self.nodes[node].remove(node)
-        del self.nodes[node]
+        """Removes node from graph."""
+        self.graph.pop(node)
+
+    def del_edge(self, val1, val2):
+        

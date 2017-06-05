@@ -137,10 +137,13 @@ def test_linked_list_search():
     """Create a new linked list, search it, and confirm we receive the right values."""
     from linked_list import LinkedList
     test_list = LinkedList([17, 3, 5, 19, 8])
+    empty_list = LinkedList()
     assert test_list.search(5) is test_list.head.next.next
     assert test_list.search(19) is test_list.head.next
     assert test_list.search(3) is test_list.head.next.next.next
     assert test_list.search(17) is test_list.head.next.next.next.next
+    assert empty_list.search(100) is None
+    assert test_list.search(100) is None
 
 
 @pytest.mark.parametrize('iter1, search, result', TEST_REM)
@@ -158,11 +161,21 @@ def test_linked_list_remove(iter1, search, result):
         res_curr = res_curr.next
 
 
-def test_linked_list_remove_edge_cases():
+def test_linked_list_remove_empty():
     """Create an empty link list and attempt to remove node."""
     from linked_list import LinkedList
     from linked_list import Node
     test_list = LinkedList()
+    with pytest.raises(IndexError):
+        test_list.remove(Node(5, None))
+
+
+def test_linked_list_remove_invalid():
+    """Create an empty link list and attempt to remove node."""
+    from linked_list import LinkedList
+    from linked_list import Node
+    test_list = LinkedList()
+    test_list.push(7)
     with pytest.raises(IndexError):
         test_list.remove(Node(5, None))
 

@@ -18,8 +18,7 @@ setup(
     extras_require=extra_packages,
     entry_points={
         'console_scripts': [
-            'dqueue = dqueue:main',
-            'linked_list = linked_list:main'
+            'dqueue = dqueue:main'
         ]
     }
 )

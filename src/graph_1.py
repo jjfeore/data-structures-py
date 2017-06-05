@@ -36,4 +36,5 @@ class Graph(object):
         self.graph.pop(node)
 
     def del_edge(self, val1, val2):
-        
+        if val2 in self.graph[val1]:
+            del self.graph[val1][val2]

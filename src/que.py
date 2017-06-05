@@ -13,15 +13,15 @@ class Queue(object):
 
     def enqueue(self, val):
         """Add a new Node to the back of the queue."""
-        return self.newDLL.push(val)
+        return self.newDLL.append(val)
 
     def dequeue(self):
         """Remove the Node at the front of the queue."""
-        return self.newDLL.shift()
+        return self.newDLL.pop()
 
     def peek(self):
         """Show the value of the next element in the queue."""
-        return self.newDLL.tail.val
+        return self.newDLL.head.val
 
     def size(self):
         """Return the length of the queue."""

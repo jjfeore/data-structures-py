@@ -38,3 +38,8 @@ class Graph(object):
     def del_edge(self, val1, val2):
         if val2 in self.graph[val1]:
             del self.graph[val1][val2]
+
+    def neighbors(self):
+
+
+    def adjacent(val1, val2):

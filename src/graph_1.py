@@ -40,6 +40,8 @@ class Graph(object):
             del self.graph[val1][val2]
 
     def neighbors(self):
-
+        
 
     def adjacent(val1, val2):
+       if val1 in self.graph[val2]:
+        return True

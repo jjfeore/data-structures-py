@@ -67,3 +67,24 @@ class Graph(object):
             return self.graph[val]
         except KeyError:
             raise KeyError('{} not in the graph.'.format(val))
+
+    def depth_first_traversal(self, val, visited=[]):
+        """Perform a full depth-first traversal of the graph."""
+        visited.append(val)
+        for neighbor in self.graph[val]:
+            if neighbor not in visited:
+                visited.extend(self.depth_first_traversal(neighbor, visited))
+        clean_vis = []
+        for value in visited:
+            if value not in clean_vis:
+                clean_vis.append[value]
+        return clean_vis
+
+    def breadth_first_traversal(self, val, visited=[]):
+        """Perform a full breadth-first traversal of the graph."""
+        visited.append(val)
+        for neighbor in self.graph[val]:
+            visited.append(neighbor)
+        for value in visited:
+            for neighbor in self.graph[value]:
+                

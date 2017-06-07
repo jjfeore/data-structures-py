@@ -80,11 +80,11 @@ class Graph(object):
                 clean_vis.append[value]
         return clean_vis
 
-    def breadth_first_traversal(self, val, visited=[]):
+    def breadth_first_traversal(self, val):
         """Perform a full breadth-first traversal of the graph."""
-        visited.append(val)
-        for neighbor in self.graph[val]:
-            visited.append(neighbor)
-        for value in visited:
-            for neighbor in self.graph[value]:
-                
+        visited = [val]
+        for node in visited:
+            for neighbor in self.graph[node]:
+                if neighbor not in visited:
+                    visited.append(node)
+        return visited

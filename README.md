@@ -21,4 +21,3 @@ Referenced https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps
 
 *Priority Queue*
 Implemented a priority queue based off our binary heap. It has a insert, pop and peek function.
-  

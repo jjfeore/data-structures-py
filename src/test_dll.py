@@ -35,7 +35,7 @@ def new_dll():
     return DLinkedList()
 
 
-def test_stack_none(new_dll):
+def test_dll_none(new_dll):
     """When a new stack is created with no iterable, head should be None."""
     assert new_dll.head is None
     assert new_dll.tail is None
@@ -43,7 +43,7 @@ def test_stack_none(new_dll):
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
-def test_stack_push_mult(val1, val2, val3, new_dll):
+def test_dll_push_mult(val1, val2, val3, new_dll):
     """Push three values and check to see that they're in the DLL."""
     new_dll.push(val1)
     new_dll.push(val2)
@@ -54,7 +54,7 @@ def test_stack_push_mult(val1, val2, val3, new_dll):
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
-def test_stack_pop(val1, val2, val3, new_dll):
+def test_dll_pop(val1, val2, val3, new_dll):
     """Push three values into a DLL, pop them and check the values."""
     new_dll.push(val1)
     new_dll.push(val2)
@@ -65,7 +65,7 @@ def test_stack_pop(val1, val2, val3, new_dll):
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
-def test_stack_append(val1, val2, val3, new_dll):
+def test_dll_append(val1, val2, val3, new_dll):
     """Append 3 values and check that they're in the DLL."""
     new_dll.append(val1)
     new_dll.append(val2)
@@ -76,7 +76,7 @@ def test_stack_append(val1, val2, val3, new_dll):
 
 
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
-def test_stack_shift(val1, val2, val3, new_dll):
+def test_dll_shift(val1, val2, val3, new_dll):
     """Append 3 values and check that the right vals shift out."""
     new_dll.append(val1)
     new_dll.append(val2)

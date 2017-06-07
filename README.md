@@ -22,4 +22,4 @@ Implemented a binary heap as a min heap. It has pop and push functions that bubb
 Implemented a priority queue based off our binary heap. It has a insert, pop and peek function.
 
 *Unweighted Directed Graph*
-Implemented a graph data structure.  It uses the following functions: node, edges, add_node, add_edge, del_node, del_edge.
+Implemented a graph data structure.  It uses the following methods: node, edges, add_node, add_edge, del_node, del_edge, has_node, neighbors, adjacent, depth_first_traversal, breadth_first_traversal.

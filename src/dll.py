@@ -72,6 +72,8 @@ class DLinkedList(object):
         """Remove a given node from the list based on its val."""
         current_node = self.head
         val_exists = False
+        if not current_node:
+            raise IndexError('Value not in list')
         if self.head.val == val:
             self.head = self.head.next
             self.head.prev = None
@@ -91,7 +93,7 @@ class DLinkedList(object):
                 break
             current_node = current_node.next
         if not val_exists:
-            raise IndexError('Node not in list')
+            raise IndexError('Value not in list')
 
     def __len__(self):
         """Return the length of the double list."""

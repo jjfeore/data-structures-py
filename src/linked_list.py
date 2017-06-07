@@ -2,7 +2,7 @@
 
 
 class Node(object):
-    """."""
+    """Define the Node object."""
 
     def __init__(self, val, next):
         """Create a new Node object with a val and a Node it points to."""
@@ -47,6 +47,8 @@ class LinkedList(object):
         """Return a string with all the list Node values and their order."""
         current_node = self.head
         the_str = '('
+        if not current_node:
+            the_str += ')'
         while current_node:
             the_str += str(current_node.val)
             if current_node.next is None:
@@ -68,6 +70,8 @@ class LinkedList(object):
         """Remove a given node from the list."""
         current_node = self.head
         node_exists = False
+        if not current_node or not node:
+            raise IndexError('Node not in list')
         if self.head is node:
             self.head = self.head.next
             self.length -= 1

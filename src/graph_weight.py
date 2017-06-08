@@ -70,6 +70,13 @@ class GraphWeighted(object):
         except KeyError:
             raise KeyError('{} not in the graph.'.format(val))
 
+    def get_node(self, val):
+        """Return the node."""
+        try:
+            return self._graph[val]
+        except KeyError:
+            raise KeyError('{} not in the graph.'.format(val))
+
     def depth_first_traversal(self, val, visited=None):
         """Perform a full depth-first traversal of the graph."""
         if not visited:
@@ -101,19 +108,20 @@ class GraphWeighted(object):
 
 
 def dijkstra(graph, start, end=None):
-    gcopy = graph.nodes()
+    gcopy = {}
     dist = {}
     prev = {}
-    for node in gcopy:
+    for node in graph.nodes():
         dist[node] = float('inf')
         prev[node] = None
+        gcopy[node] = graph.get_node(node)
     dist[start] = 0
     while gcopy:
-        curr = min(dist, key=dist.get)
+        curr = min(gcopy, key=dist.get)
         if curr == end:
             return dist, prev
-        curr_list = graph[curr]
-        gcopy.remove(curr)
+        curr_list = gcopy[curr]
+        gcopy.pop(curr)
         for neighbor in curr_list:
             tmp = dist[curr] + curr_list[neighbor]
             if tmp < dist[neighbor]:
@@ -130,7 +138,8 @@ def shortest_path(graph, start, end):
         if end == start:
             break
         end = prev[end]
-    return path.reverse()
+    # import pdb; pdb.set_trace()
+    return path[::-1]
 
 
 if __name__ == '__main__':

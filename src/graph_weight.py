@@ -1,11 +1,11 @@
-"""Implement a graph data structure."""
+"""Implement a weighted-edge graph data structure."""
 
 
-class Graph(object):
+class GraphWeighted(object):
     """Define graph and modules."""
 
     def __init__(self):
-        """Instantiate a new graph."""
+        """Instantiate a new dictionary as the basis of our graph."""
         self.graph = {}
 
     def nodes(self):
@@ -17,29 +17,30 @@ class Graph(object):
         edges = []
         for node in self.graph:
             for i in self.graph[node]:
-                edges.append((node, i))
+                edges.append((node, i, self.graph[node][i]))
         return edges
 
     def add_node(self, x):
-        """Add a node with a iterable which is a neighbor of x."""
+        """Add a vertex to the graph, represented by an empty dictionary."""
         if x not in self.graph:
-            self.graph[x] = []
+            self.graph[x] = {}
 
-    def add_edge(self, val1, val2):
-        """Add an edge between two values."""
+    def add_edge(self, val1, val2, weight):
+        """Add an edge between two values, with an associated weight."""
+        if not isinstance(weight, int):
+            raise ValueError('Weight parameter must be an integer')
         if val1 not in self.graph:
-            self.graph[val1] = []
+            self.graph[val1] = {}
         if val2 not in self.graph:
-            self.graph[val2] = []
-        if val2 not in self.graph[val1]:
-            self.graph[val1].append(val2)
+            self.graph[val2] = {}
+        self.graph[val1][val2] = weight
 
     def del_node(self, node):
-        """Remove node from graph."""
+        """Remove node from graph and all edges to that node."""
         if self.graph.pop(node):
             for a_node in self.graph:
                 if node in self.graph[a_node]:
-                    self.graph[a_node].remove(node)
+                    self.graph[a_node].pop(node)
 
     def has_node(self, val):
         """Check to see if a specified node exists in the graph. Return a bool."""
@@ -50,7 +51,7 @@ class Graph(object):
     def del_edge(self, val1, val2):
         """Delete the edge between two nodes."""
         if val2 in self.graph[val1]:
-            del self.graph[val1][val2]
+            self.graph[val1].pop(val2)
 
     def adjacent(self, val1, val2):
         """Return whether or not two nodes are linked by an edge."""
@@ -64,7 +65,7 @@ class Graph(object):
     def neighbors(self, val):
         """Return a list all of a node's neighbors."""
         try:
-            return self.graph[val]
+            return list(self.graph[val].keys())
         except KeyError:
             raise KeyError('{} not in the graph.'.format(val))
 
@@ -97,7 +98,7 @@ class Graph(object):
 
 
 if __name__ == '__main__':
-    test = Graph()
+    test = GraphWeighted()
     test.add_node('top1')
     test.add_node('mid1')
     test.add_node('mid2')
@@ -113,20 +114,21 @@ if __name__ == '__main__':
     test.add_node('btm5')
     test.add_node('btm6')
     test.add_node('btm7')
-    test.add_edge('top1', 'mid1')
-    test.add_edge('top1', 'mid2')
-    test.add_edge('mid1', 'third1')
-    test.add_edge('mid1', 'third2')
-    test.add_edge('mid1', 'top1')
-    test.add_edge('mid1', 'third3')
-    test.add_edge('mid2', 'third4')
-    test.add_edge('mid2', 'third5')
-    test.add_edge('third1', 'btm1')
-    test.add_edge('third1', 'btm2')
-    test.add_edge('third2', 'btm3')
-    test.add_edge('third3', 'btm4')
-    test.add_edge('third3', 'btm5')
-    test.add_edge('third5', 'btm6')
-    test.add_edge('third5', 'btm7')
+    test.add_edge('top1', 'mid1', 78)
+    test.add_edge('top1', 'mid2', 13)
+    test.add_edge('mid1', 'third1', 23)
+    test.add_edge('mid1', 'third2', 57)
+    test.add_edge('mid1', 'top1', 16)
+    test.add_edge('mid1', 'third3', 201)
+    test.add_edge('mid2', 'third4', 78)
+    test.add_edge('mid2', 'third5', 91)
+    test.add_edge('third1', 'btm1', 3)
+    test.add_edge('third1', 'btm2', 145)
+    test.add_edge('third2', 'btm3', 30)
+    test.add_edge('third3', 'btm4', 116)
+    test.add_edge('third3', 'btm5', 167)
+    test.add_edge('third5', 'btm6', 33)
+    test.add_edge('third5', 'btm7', 99)
     print('DFT: {}'.format(test.depth_first_traversal('top1')))
     print('BFT: {}'.format(test.breadth_first_traversal('top1')))
+    print('Edges: {}'.format(test.edges()))

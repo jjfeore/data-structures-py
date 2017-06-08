@@ -68,8 +68,10 @@ class Graph(object):
         except KeyError:
             raise KeyError('{} not in the graph.'.format(val))
 
-    def depth_first_traversal(self, val, visited=[]):
+    def depth_first_traversal(self, val, visited=None):
         """Perform a full depth-first traversal of the graph."""
+        if not visited:
+            visited = []
         if val in self.graph:
             visited.append(val)
         else:

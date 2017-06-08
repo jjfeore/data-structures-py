@@ -2,62 +2,62 @@
 
 
 class GraphWeighted(object):
-    """Define graph and modules."""
+    """Define a weighted graph and modules."""
 
     def __init__(self):
         """Instantiate a new dictionary as the basis of our graph."""
-        self.graph = {}
+        self._graph = {}
 
     def nodes(self):
         """Return a list of all the nodes in the graph."""
-        return list(self.graph.keys())
+        return list(self._graph.keys())
 
     def edges(self):
-        """List the edges."""
+        """List the edges and their weights."""
         edges = []
-        for node in self.graph:
-            for i in self.graph[node]:
-                edges.append((node, i, self.graph[node][i]))
+        for node in self._graph:
+            for i in self._graph[node]:
+                edges.append((node, i, self._graph[node][i]))
         return edges
 
     def add_node(self, x):
         """Add a vertex to the graph, represented by an empty dictionary."""
-        if x not in self.graph:
-            self.graph[x] = {}
+        if x not in self._graph:
+            self._graph[x] = {}
 
     def add_edge(self, val1, val2, weight):
         """Add an edge between two values, with an associated weight."""
         if not isinstance(weight, int):
             raise ValueError('Weight parameter must be an integer')
-        if val1 not in self.graph:
-            self.graph[val1] = {}
-        if val2 not in self.graph:
-            self.graph[val2] = {}
-        self.graph[val1][val2] = weight
+        if val1 not in self._graph:
+            self._graph[val1] = {}
+        if val2 not in self._graph:
+            self._graph[val2] = {}
+        self._graph[val1][val2] = weight
 
     def del_node(self, node):
         """Remove node from graph and all edges to that node."""
-        if self.graph.pop(node):
-            for a_node in self.graph:
-                if node in self.graph[a_node]:
-                    self.graph[a_node].pop(node)
+        if self._graph.pop(node):
+            for a_node in self._graph:
+                if node in self._graph[a_node]:
+                    self._graph[a_node].pop(node)
 
     def has_node(self, val):
-        """Check to see if a specified node exists in the graph. Return a bool."""
-        if val in self.graph:
+        """Check to see if a specified node exists in the graph."""
+        if val in self._graph:
             return True
         return False
 
     def del_edge(self, val1, val2):
         """Delete the edge between two nodes."""
-        if val2 in self.graph[val1]:
-            self.graph[val1].pop(val2)
+        if val2 in self._graph[val1]:
+            self._graph[val1].pop(val2)
 
     def adjacent(self, val1, val2):
         """Return whether or not two nodes are linked by an edge."""
         if not self.has_node(val1) or not self.has_node(val2):
-            raise ValueError('Graph does not contain one of the nodes')
-        if val2 in self.graph[val1]:
+            raise ValueError('_Graph does not contain one of the nodes')
+        if val2 in self._graph[val1]:
             return True
         else:
             return False
@@ -65,17 +65,19 @@ class GraphWeighted(object):
     def neighbors(self, val):
         """Return a list all of a node's neighbors."""
         try:
-            return list(self.graph[val].keys())
+            return list(self._graph[val].keys())
         except KeyError:
             raise KeyError('{} not in the graph.'.format(val))
 
-    def depth_first_traversal(self, val, visited=[]):
+    def depth_first_traversal(self, val, visited=None):
         """Perform a full depth-first traversal of the graph."""
-        if val in self.graph:
+        if not visited:
+            visited = []
+        if val in self._graph:
             visited.append(val)
         else:
             raise ValueError('Specified value is not a node in the graph')
-        for neighbor in self.graph[val]:
+        for neighbor in self._graph[val]:
             if neighbor not in visited:
                 visited.extend(self.depth_first_traversal(neighbor, visited))
         clean_vis = []
@@ -86,12 +88,12 @@ class GraphWeighted(object):
 
     def breadth_first_traversal(self, val):
         """Perform a full breadth-first traversal of the graph."""
-        if val in self.graph:
+        if val in self._graph:
             visited = [val]
         else:
             raise ValueError('Specified value is not a node in the graph')
         for node in visited:
-            for neighbor in self.graph[node]:
+            for neighbor in self._graph[node]:
                 if neighbor not in visited:
                     visited.append(neighbor)
         return visited

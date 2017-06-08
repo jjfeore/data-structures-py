@@ -23,3 +23,6 @@ Implemented a priority queue based off our binary heap. It has a insert, pop and
 
 *Unweighted Directed Graph*
 Implemented a graph data structure.  It uses the following methods: node, edges, add_node, add_edge, del_node, del_edge, has_node, neighbors, adjacent, depth_first_traversal, breadth_first_traversal.
+
+*Weighted-Edge Directed Graph*
+Identical to the unweighted graph, except the edges now have associated weights. Most notably, the add_edge method now takes an additional weight parameter.

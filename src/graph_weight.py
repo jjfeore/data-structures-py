@@ -1,4 +1,5 @@
 """Implement a weighted-edge graph data structure."""
+import copy
 
 
 class GraphWeighted(object):
@@ -27,8 +28,8 @@ class GraphWeighted(object):
 
     def add_edge(self, val1, val2, weight):
         """Add an edge between two values, with an associated weight."""
-        if not isinstance(weight, int):
-            raise ValueError('Weight parameter must be an integer')
+        if not isinstance(weight, int) or weight < 0:
+            raise ValueError('Weight parameter must be a positive integer.')
         if val1 not in self._graph:
             self._graph[val1] = {}
         if val2 not in self._graph:
@@ -99,6 +100,39 @@ class GraphWeighted(object):
         return visited
 
 
+def dijkstra(graph, start, end=None):
+    gcopy = graph.nodes()
+    dist = {}
+    prev = {}
+    for node in gcopy:
+        dist[node] = float('inf')
+        prev[node] = None
+    dist[start] = 0
+    while gcopy:
+        curr = min(dist, key=dist.get)
+        if curr == end:
+            return dist, prev
+        curr_list = graph[curr]
+        gcopy.remove(curr)
+        for neighbor in curr_list:
+            tmp = dist[curr] + curr_list[neighbor]
+            if tmp < dist[neighbor]:
+                dist[neighbor] = tmp
+                prev[neighbor] = curr
+    return dist, prev
+
+
+def shortest_path(graph, start, end):
+    dist, prev = dijkstra(graph, start, end)
+    path = []
+    while True:
+        path.append(end)
+        if end == start:
+            break
+        end = prev[end]
+    return path.reverse()
+
+
 if __name__ == '__main__':
     test = GraphWeighted()
     test.add_node('top1')
@@ -117,16 +151,17 @@ if __name__ == '__main__':
     test.add_node('btm6')
     test.add_node('btm7')
     test.add_edge('top1', 'mid1', 78)
-    test.add_edge('top1', 'mid2', 13)
+    test.add_edge('top1', 'mid2', 113)
     test.add_edge('mid1', 'third1', 23)
     test.add_edge('mid1', 'third2', 57)
     test.add_edge('mid1', 'top1', 16)
-    test.add_edge('mid1', 'third3', 201)
+    test.add_edge('mid1', 'third3', 21)
     test.add_edge('mid2', 'third4', 78)
     test.add_edge('mid2', 'third5', 91)
     test.add_edge('third1', 'btm1', 3)
     test.add_edge('third1', 'btm2', 145)
     test.add_edge('third2', 'btm3', 30)
+    test.add_edge('third3', 'btm7', 4)
     test.add_edge('third3', 'btm4', 116)
     test.add_edge('third3', 'btm5', 167)
     test.add_edge('third5', 'btm6', 33)
@@ -134,3 +169,4 @@ if __name__ == '__main__':
     print('DFT: {}'.format(test.depth_first_traversal('top1')))
     print('BFT: {}'.format(test.breadth_first_traversal('top1')))
     print('Edges: {}'.format(test.edges()))
+    print(shortest_path(test, 'top1', 'btm7'))

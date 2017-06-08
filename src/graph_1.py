@@ -22,14 +22,14 @@ class Graph(object):
 
     def add_node(self, x):
         """Add a node with a iterable which is a neighbor of x."""
-        if not self.graph[x]:
+        if x not in self.graph:
             self.graph[x] = []
 
     def add_edge(self, val1, val2):
         """Add an edge between two values."""
-        if not self.graph[val1]:
+        if val1 not in self.graph:
             self.graph[val1] = []
-        if not self.graph[val2]:
+        if val2 not in self.graph:
             self.graph[val2] = []
         if val2 not in self.graph[val1]:
             self.graph[val1].append(val2)
@@ -70,21 +70,63 @@ class Graph(object):
 
     def depth_first_traversal(self, val, visited=[]):
         """Perform a full depth-first traversal of the graph."""
-        visited.append(val)
+        if val in self.graph:
+            visited.append(val)
+        else:
+            raise ValueError('Specified value is not a node in the graph')
         for neighbor in self.graph[val]:
             if neighbor not in visited:
                 visited.extend(self.depth_first_traversal(neighbor, visited))
         clean_vis = []
         for value in visited:
             if value not in clean_vis:
-                clean_vis.append[value]
+                clean_vis.append(value)
         return clean_vis
 
     def breadth_first_traversal(self, val):
         """Perform a full breadth-first traversal of the graph."""
-        visited = [val]
+        if val in self.graph:
+            visited = [val]
+        else:
+            raise ValueError('Specified value is not a node in the graph')
         for node in visited:
             for neighbor in self.graph[node]:
                 if neighbor not in visited:
-                    visited.append(node)
+                    visited.append(neighbor)
         return visited
+
+
+if __name__ == '__main__':
+    test = Graph()
+    test.add_node('top1')
+    test.add_node('mid1')
+    test.add_node('mid2')
+    test.add_node('third1')
+    test.add_node('third2')
+    test.add_node('third3')
+    test.add_node('third4')
+    test.add_node('third5')
+    test.add_node('btm1')
+    test.add_node('btm2')
+    test.add_node('btm3')
+    test.add_node('btm4')
+    test.add_node('btm5')
+    test.add_node('btm6')
+    test.add_node('btm7')
+    test.add_edge('top1', 'mid1')
+    test.add_edge('top1', 'mid2')
+    test.add_edge('mid1', 'third1')
+    test.add_edge('mid1', 'third2')
+    test.add_edge('mid1', 'top1')
+    test.add_edge('mid1', 'third3')
+    test.add_edge('mid2', 'third4')
+    test.add_edge('mid2', 'third5')
+    test.add_edge('third1', 'btm1')
+    test.add_edge('third1', 'btm2')
+    test.add_edge('third2', 'btm3')
+    test.add_edge('third3', 'btm4')
+    test.add_edge('third3', 'btm5')
+    test.add_edge('third5', 'btm6')
+    test.add_edge('third5', 'btm7')
+    print('DFT: {}'.format(test.depth_first_traversal('top1')))
+    print('BFT: {}'.format(test.breadth_first_traversal('top1')))

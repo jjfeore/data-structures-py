@@ -1,6 +1,5 @@
 """Test the dqueue.py module."""
 
-
 import pytest
 
 

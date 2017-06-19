@@ -1,6 +1,5 @@
 """Test the challenge1.py module."""
 
-
 import pytest
 
 
@@ -15,7 +14,6 @@ def test_challenge():
     the_list.push(6)
     the_list.head.next.next.next = the_list.head.next
     assert check_for_loop(the_list) == True
-
 
 
 def test_challenge_2():

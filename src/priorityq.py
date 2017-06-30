@@ -7,7 +7,7 @@ class Priorityq:
 
     def insert(self, val, pri=0):
         """Add a value to our priority queue that has a priority."""
-        self.prq.append([val, pri])
+        self.prq.append([val])
         pos = len(self.prq) - 1
         if len(self.prq) > 1 and pri > 0:
             if pos % 2 == 1:

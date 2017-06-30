@@ -1,5 +1,4 @@
 """Implement a weighted-edge graph data structure."""
-import copy
 
 
 class GraphWeighted(object):

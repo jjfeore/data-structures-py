@@ -44,21 +44,25 @@ class Priorityq:
         if len(self.prq) > 1:
             left = (pos * 2) + 1
             right = (pos * 2) + 2
-            while self.prq[left][1] < self.prq[pos][1] or self.prq[right][1] < self.prq[pos][1]:
-                if self.prq[left][1] < self.prq[pos][1]:
-                    tmp = self.prq[left]
-                    self.prq[left] = self.prq[pos]
-                    self.prq[pos] = tmp
-                    pos = left
-                    left = (pos * 2) + 1
-                    right = (pos * 2) + 2
-                elif self.prq[right][1] < self.prq[pos][1]:
-                    tmp = self.prq[right]
-                    self.prq[right] = self.prq[pos]
-                    self.prq[pos] = tmp
-                    pos = right
-                    left = (pos * 2) + 1
-                    right = (pos * 2) + 2
+            if left > len(self.prq) - 1:
+                left = pos
+            if right > len(self.prq) - 1:
+                right = pos
+            while self.prq[left][1] > self.prq[pos][1] or self.prq[right][1] > self.prq[pos][1]:
+                if self.prq[left][1] > self.prq[right][1]:
+                    switch_with = left
+                else:
+                    switch_with = right
+                tmp = self.prq[switch_with]
+                self.prq[switch_with] = self.prq[pos]
+                self.prq[pos] = tmp
+                pos = switch_with
+                left = (pos * 2) + 1
+                right = (pos * 2) + 2
+                if left > len(self.prq) - 1:
+                    left = pos
+                if right > len(self.prq) - 1:
+                    right = pos
         return top
 
     def peek(self):

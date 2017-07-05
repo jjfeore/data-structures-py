@@ -69,6 +69,8 @@ def test_pri_que_pop(new_pri_que):
     assert new_pri_que.pop() == 3
     assert new_pri_que.prq[0] == [300, 10]
     assert new_pri_que.pop() == 300
+    assert new_pri_que.prq[0] == ["a string", 9]
+    assert new_pri_que.pop() == "a string"
 
 
 def test_pri_que_peek(new_pri_que):

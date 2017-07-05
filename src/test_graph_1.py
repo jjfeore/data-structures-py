@@ -48,18 +48,6 @@ def full_graph():
     return test
 
 
-# def test_pri_que_raises_valerror_on_bad_priority(new_pri_que):
-#     """Insert a value with a too-low priority. It should raise an error."""
-#     with pytest.raises(ValueError):
-#         new_pri_que.insert(5, -1)
-
-
-# def test_pri_que_raises_typeerror_on_priority_as_non_int(new_pri_que):
-#     """Insert a value with a too-low priority. It should raise an error."""
-#     with pytest.raises(TypeError):
-#         new_pri_que.insert(5, "hello")
-
-
 def test_init_graph_empty(new_graph):
     """Instantiate a new graph."""
     assert new_graph.graph == {}
@@ -150,3 +138,53 @@ def test_graph_del_edge(full_graph):
     all_edges = full_graph.edges()
     assert ('mid1', 'top1') not in all_edges
     assert ('mid2', 'third4') not in all_edges
+
+
+def test_graph_adjacent_raises_error_on_bad_val(full_graph):
+    """Trying to find if a non-existent node is adjacent to anything raises error."""
+    with pytest.raises(ValueError):
+        full_graph.adjacent('blah', 'top1')
+
+
+def test_graph_adjacent(full_graph):
+    """Check to see if several nodes are adjacent."""
+    assert full_graph.adjacent('top1', 'mid1')
+    assert full_graph.adjacent('mid1', 'third1')
+    assert full_graph.adjacent('mid1', 'third2')
+    assert full_graph.adjacent('mid1', 'third3')
+    assert full_graph.adjacent('mid1', 'top1')
+    assert not full_graph.adjacent('third3', 'third4')
+
+
+def test_graph_neighbors_bad_key_raises_error(full_graph):
+    """Getting neighbors of a non-node raises an error."""
+    with pytest.raises(KeyError):
+        full_graph.neighbors('blah')
+
+
+def test_graph_neighbors(full_graph):
+    """Check to see if all neighbors are returned."""
+    assert full_graph.neighbors('mid1') == ['third1', 'third2', 'top1', 'third3']
+
+
+def test_graph_depth_first_with_non_key_raises_error(full_graph):
+    """Traversing from a non-existent node raises an error."""
+    with pytest.raises(ValueError):
+        full_graph.depth_first_traversal('blah')
+
+
+def test_graph_depth_first(full_graph):
+    """Check if a proper DFT is returned."""
+    assert full_graph.depth_first_traversal('top1') == ['top1', 'mid1', 'third1', 'btm1', 'btm2', 'third2', 'btm3', 'third3', 'btm4', 'btm5', 'mid2', 'third4', 'third5', 'btm6', 'btm7']
+
+
+def test_graph_breadth_first_with_non_key_raises_error(full_graph):
+    """Traversing from a non-existent node raises an error."""
+    with pytest.raises(ValueError):
+        full_graph.breadth_first_traversal('blah')
+
+
+def test_graph_breadth_first(full_graph):
+    """Check if a proper BFT is returned."""
+    assert full_graph.breadth_first_traversal('top1') == ['top1', 'mid1', 'mid2', 'third1', 'third2', 'third3', 'third4', 'third5', 'btm1', 'btm2', 'btm3', 'btm4', 'btm5', 'btm6', 'btm7']
+

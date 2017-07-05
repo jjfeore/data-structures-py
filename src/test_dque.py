@@ -88,6 +88,7 @@ def test_dque_popleft(val1, val2, val3, new_dque):
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
 def test_dque_peek(val1, val2, val3, new_dque):
     """Append 3 values and confirm that peek sees the end of the dque."""
+    assert new_dque.peek() is None
     new_dque.append(val1)
     new_dque.append(val2)
     new_dque.append(val3)
@@ -97,6 +98,7 @@ def test_dque_peek(val1, val2, val3, new_dque):
 @pytest.mark.parametrize('val1, val2, val3', TEST_PUSH_MULT)
 def test_dque_peekleft(val1, val2, val3, new_dque):
     """Append 3 values and confirm that peekleft sees the front of the dque."""
+    assert new_dque.peekleft() is None
     new_dque.append(val1)
     new_dque.append(val2)
     new_dque.append(val3)

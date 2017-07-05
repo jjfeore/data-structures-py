@@ -29,11 +29,15 @@ class Dque(object):
 
     def peek(self):
         """Return the value that is at the end of the queue."""
-        return self.new_dll.tail.val
+        if self.new_dll.tail:
+            return self.new_dll.tail.val
+        return None
 
     def peekleft(self):
         """Return the value that is at the front of the queue."""
-        return self.new_dll.head.val
+        if self.new_dll.head:
+            return self.new_dll.head.val
+        return None
 
     def size(self):
         """Return the size of the queue."""

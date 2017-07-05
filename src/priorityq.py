@@ -2,12 +2,19 @@
 
 
 class Priorityq:
+    """Define a priority queue and its methods."""
+
     def __init__(self):
+        """Init a pque as a list."""
         self.prq = []
 
     def insert(self, val, pri=0):
-        """Add a value to our priority queue that has a priority."""
-        self.prq.append([val])
+        """Add a value to our priority queue that has an optional priority."""
+        if pri < 0:
+            raise ValueError("Minimum priority is 0")
+        if type(pri) not in (int, float):
+            raise TypeError("Priority must be an integer or float")
+        self.prq.append([val, pri])
         pos = len(self.prq) - 1
         if len(self.prq) > 1 and pri > 0:
             if pos % 2 == 1:
@@ -19,6 +26,8 @@ class Priorityq:
                 self.prq[parent] = self.prq[pos]
                 self.prq[pos] = tmp
                 pos = parent
+                if pos == 0:
+                    break
                 if pos % 2 == 1:
                     parent = pos // 2
                 else:
@@ -26,6 +35,8 @@ class Priorityq:
 
     def pop(self):
         """Remove the value that is at the top of the prq."""
+        if not self.prq:
+            return None
         top = self.prq[0][0]
         self.prq[0] = self.prq[-1]
         del self.prq[-1]
@@ -51,4 +62,7 @@ class Priorityq:
         return top
 
     def peek(self):
-        return self.prq[0][0]
+        """Look at the value at the front of the priority queue."""
+        if self.prq:
+            return self.prq[0][0]
+        return None

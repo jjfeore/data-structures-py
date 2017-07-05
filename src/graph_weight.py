@@ -141,7 +141,7 @@ def shortest_path(graph, start, end):
     return path[::-1]
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     test = GraphWeighted()
     test.add_node('top1')
     test.add_node('mid1')

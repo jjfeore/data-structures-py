@@ -50,7 +50,7 @@ class Graph(object):
     def del_edge(self, val1, val2):
         """Delete the edge between two nodes."""
         if val2 in self.graph[val1]:
-            del self.graph[val1][val2]
+            self.graph[val1].remove(val2)
 
     def adjacent(self, val1, val2):
         """Return whether or not two nodes are linked by an edge."""
@@ -98,7 +98,7 @@ class Graph(object):
         return visited
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     test = Graph()
     test.add_node('top1')
     test.add_node('mid1')

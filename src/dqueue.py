@@ -4,7 +4,7 @@
 from dll import DLinkedList
 
 
-def Dque(object):
+class Dque(object):
     """Define dqueue and its methods."""
 
     def __init__(self):
@@ -17,7 +17,7 @@ def Dque(object):
 
     def appendleft(self, val):
         """Add a new value to the start of the queue."""
-        self.new_dll.append(val)
+        self.new_dll.push(val)
 
     def pop(self):
         """Remove the value that is at the end of the queue."""
@@ -29,11 +29,15 @@ def Dque(object):
 
     def peek(self):
         """Return the value that is at the end of the queue."""
-        return self.new_dll.tail.val
+        if self.new_dll.tail:
+            return self.new_dll.tail.val
+        return None
 
     def peekleft(self):
         """Return the value that is at the front of the queue."""
-        return self.new_dll.head.val
+        if self.new_dll.head:
+            return self.new_dll.head.val
+        return None
 
     def size(self):
         """Return the size of the queue."""

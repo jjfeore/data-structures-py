@@ -16,8 +16,13 @@ Implemented a DLL with push, pop, shift, append, remove, and len() functionality
 Implemented a queue as a composition of a DLL. It has enqueue, dequeue, len(), and peek functionality.
 
 *Binary Heap*
-Implemented a binary heap as a min heap. It has pop and push functions that bubbles down the list.
-Referenced https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html
+Implemented a binary heap as a min heap. It has pop and push functions that bubbles down the list. Referenced https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html
 
 *Priority Queue*
 Implemented a priority queue based off our binary heap. It has a insert, pop and peek function.
+
+*Unweighted Directed Graph*
+Implemented a graph data structure.  It uses the following methods: node, edges, add_node, add_edge, del_node, del_edge, has_node, neighbors, adjacent, depth_first_traversal, breadth_first_traversal.
+
+*Weighted-Edge Directed Graph*
+Identical to the unweighted graph, except the edges now have associated weights. Most notably, the add_edge method now takes an additional weight parameter.

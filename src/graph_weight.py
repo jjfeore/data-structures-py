@@ -128,8 +128,8 @@ def bellmanford(graph, start, end):
     return path[::-1]
 
 
-def dijkstra(graph, start, end=None):
-    """Implement Dijkstra's algorithm."""
+def dijkstra(graph, start, end):
+    """Return the shortest path using Dijkstra's algorithm."""
     gcopy = {}
     dist = {}
     prev = {}
@@ -141,7 +141,7 @@ def dijkstra(graph, start, end=None):
     while gcopy:
         curr = min(gcopy, key=dist.get)
         if curr == end:
-            return dist, prev
+            break
         curr_list = gcopy[curr]
         gcopy.pop(curr)
         for neighbor in curr_list:
@@ -149,12 +149,6 @@ def dijkstra(graph, start, end=None):
             if tmp < dist[neighbor]:
                 dist[neighbor] = tmp
                 prev[neighbor] = curr
-    return dist, prev
-
-
-def shortest_path(graph, start, end):
-    """Return the shortest path using Dijkstra's."""
-    dist, prev = dijkstra(graph, start, end)
     path = []
     while True:
         path.append(end)

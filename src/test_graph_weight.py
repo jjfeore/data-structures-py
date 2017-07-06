@@ -219,48 +219,15 @@ def test_graph_breadth_first_returns_list(full_graph):
     assert test[0] == 'top1'
 
 
-def test_graph_dijkstra(full_graph):
-    """Dijkstra should return two dicts of distances and previous nodes."""
-    from graph_weight import dijkstra
-    dist, prev = dijkstra(full_graph, 'top1')
-    assert dist == {
-        'btm1': 104,
-        'btm2': 246,
-        'btm3': 165,
-        'btm4': 215,
-        'btm5': 266,
-        'btm6': 237,
-        'btm7': 103,
-        'mid1': 78,
-        'mid2': 113,
-        'third1': 101,
-        'third2': 135,
-        'third3': 99,
-        'third4': 191,
-        'third5': 204,
-        'top1': 0
-    }
-    assert prev == {
-        'btm1': 'third1',
-        'btm2': 'third1',
-        'btm3': 'third2',
-        'btm4': 'third3',
-        'btm5': 'third3',
-        'btm6': 'third5',
-        'btm7': 'third3',
-        'mid1': 'top1',
-        'mid2': 'top1',
-        'third1': 'mid1',
-        'third2': 'mid1',
-        'third3': 'mid1',
-        'third4': 'mid2',
-        'third5': 'mid2',
-        'top1': None
-    }
-
-
-def test_shortest_path(full_graph):
+def test_dijkstra(full_graph):
     """Shortest path should return the shortest path w/ Dijkstra's algo."""
-    from graph_weight import shortest_path
-    assert shortest_path(full_graph, 'top1', 'btm7') == ['top1', 'mid1', 'third3', 'btm7']
-    assert shortest_path(full_graph, 'mid2', 'btm6') == ['mid2', 'third5', 'btm6']
+    from graph_weight import dijkstra
+    assert dijkstra(full_graph, 'top1', 'btm7') == ['top1', 'mid1', 'third3', 'btm7']
+    assert dijkstra(full_graph, 'mid2', 'btm6') == ['mid2', 'third5', 'btm6']
+
+
+def test_bellmanford(full_graph):
+    """Shortest path should return the shortest path w/ Bellman-Ford's algo."""
+    from graph_weight import bellmanford
+    assert bellmanford(full_graph, 'top1', 'btm7') == ['top1', 'mid1', 'third3', 'btm7']
+    assert bellmanford(full_graph, 'mid2', 'btm6') == ['mid2', 'third5', 'btm6']

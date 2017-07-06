@@ -187,4 +187,3 @@ def test_graph_breadth_first_with_non_key_raises_error(full_graph):
 def test_graph_breadth_first(full_graph):
     """Check if a proper BFT is returned."""
     assert full_graph.breadth_first_traversal('top1') == ['top1', 'mid1', 'mid2', 'third1', 'third2', 'third3', 'third4', 'third5', 'btm1', 'btm2', 'btm3', 'btm4', 'btm5', 'btm6', 'btm7']
-

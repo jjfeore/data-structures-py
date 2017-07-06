@@ -106,7 +106,30 @@ class GraphWeighted(object):
         return visited
 
 
+def bellmanford(graph, start, end):
+    """Return the shortest path using Bellman-Ford algorithm."""
+    dist = {}
+    prev = {}
+    for node in graph.nodes():
+        dist[node] = float('inf')
+        prev[node] = None
+    dist[start] = 0
+    for node in graph.nodes():
+        for edge in graph.edges():
+            if dist[edge[0]] + graph.get_node(edge[0])[edge[1]] < dist[edge[1]]:
+                dist[edge[1]] = dist[edge[0]] + graph.get_node(edge[0])[edge[1]]
+                prev[edge[1]] = edge[0]
+    path = []
+    while True:
+        path.append(end)
+        if end == start:
+            break
+        end = prev[end]
+    return path[::-1]
+
+
 def dijkstra(graph, start, end=None):
+    """Implement Dijkstra's algorithm."""
     gcopy = {}
     dist = {}
     prev = {}
@@ -130,6 +153,7 @@ def dijkstra(graph, start, end=None):
 
 
 def shortest_path(graph, start, end):
+    """Return the shortest path using Dijkstra's."""
     dist, prev = dijkstra(graph, start, end)
     path = []
     while True:
@@ -137,7 +161,6 @@ def shortest_path(graph, start, end):
         if end == start:
             break
         end = prev[end]
-    # import pdb; pdb.set_trace()
     return path[::-1]
 
 
@@ -178,3 +201,4 @@ if __name__ == '__main__':  # pragma: no cover
     print('BFT: {}'.format(test.breadth_first_traversal('top1')))
     print('Edges: {}'.format(test.edges()))
     print(shortest_path(test, 'top1', 'btm7'))
+    print(bellmanford(test, 'top1', 'btm7'))

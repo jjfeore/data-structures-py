@@ -194,5 +194,5 @@ if __name__ == '__main__':  # pragma: no cover
     print('DFT: {}'.format(test.depth_first_traversal('top1')))
     print('BFT: {}'.format(test.breadth_first_traversal('top1')))
     print('Edges: {}'.format(test.edges()))
-    print(shortest_path(test, 'top1', 'btm7'))
+    print(dijkstra(test, 'top1', 'btm7'))
     print(bellmanford(test, 'top1', 'btm7'))
